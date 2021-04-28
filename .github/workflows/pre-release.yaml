@@ -173,11 +173,10 @@ jobs:
 
           # Cache the current info
           commit="$(git rev-parse HEAD)"
-          branch="$(git branch --show-current)"
 
           # commit the change
           git commit -m "github-actions: updated release binaries from ${commit}"
-          git push origin "${{ github.head_ref }}"
+          git push
       - uses: actions/create-release@v1
         id: rules_rust_release
         env:
