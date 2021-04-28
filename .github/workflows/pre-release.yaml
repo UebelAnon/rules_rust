@@ -168,10 +168,6 @@ jobs:
 
           git stage ${{ github.workspace }}/crate_universe/private/defaults.bzl && git status
 
-          # Setup git and commit back to the repo
-          git config user.email "github-actions@github.com"
-          git config user.name "github-actions"
-
           # Cache the current info
           commit="$(git rev-parse HEAD)"
           branch="$(git branch --show-current)"
