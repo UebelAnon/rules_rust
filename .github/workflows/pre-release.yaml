@@ -109,13 +109,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: "${{ github.head_ref }}"
+          ref: "${{ github.base_ref }}"
           # Save the git credentials so we can commit back to the repo
           persist-credentials: true
       - run: |
           # Get current release version
           git fetch origin &> /dev/null
-          RELEASE_VERSION="$(cat version.bzl | grep VERSION | sed 's/VERSION = "//' | sed 's/"//')"
+          RELEASE_VERSION="$(cat ${{ github.workspace }}/version.bzl | grep VERSION | sed 's/VERSION = "//' | sed 's/"//')"
           echo "RELEASE_VERSION=${RELEASE_VERSION}" >> $GITHUB_ENV
 
           # Get release candidate number
