@@ -18,7 +18,7 @@ defaults:
 
 jobs:
   is_author_maintainer:
-    if: ${{ github.repository_owner == 'bazelbuild' }}
+    # if: ${{ github.repository_owner == 'bazelbuild' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
           git branch -d pre-release/${{ github.run_id }}
           git push origin --delete pre-release/${{ github.run_id }}
   crate_universe_builds:
-    if: ${{ github.repository_owner == 'bazelbuild' }}
+    # if: ${{ github.repository_owner == 'bazelbuild' }}
     needs: is_author_maintainer
     runs-on: ${{ matrix.os }}
     strategy:
@@ -103,7 +103,7 @@ jobs:
           path: ${{ github.workspace }}/crate_universe/private/bootstrap/bin/${{ matrix.env.TARGET }}
           if-no-files-found: error
   pre_release:
-    if: ${{ github.repository_owner == 'bazelbuild' }}
+    # if: ${{ github.repository_owner == 'bazelbuild' }}
     needs: crate_universe_builds
     runs-on: ubuntu-latest
     steps:
