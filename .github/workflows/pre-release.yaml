@@ -17,26 +17,26 @@ defaults:
     shell: bash
 
 jobs:
-  is_author_maintainer:
-    # if: ${{ github.repository_owner == 'bazelbuild' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          # Save the git credentials so we can commit back to the repo
-          persist-credentials: true
-      - run: |
-          # Ensure the author of the pull request is a maintainer
-          # This is done by creating and deleting a branch
-          git fetch origin
-          git branch pre-release/${{ github.run_id }} origin/main
-          git push -u origin pre-release/${{ github.run_id }}
-          git checkout ${{ github.base_ref }}
-          git branch -d pre-release/${{ github.run_id }}
-          git push origin --delete pre-release/${{ github.run_id }}
+#  is_author_maintainer:
+#    # if: ${{ github.repository_owner == 'bazelbuild' }}
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          # Save the git credentials so we can commit back to the repo
+#          persist-credentials: true
+#      - run: |
+#          # Ensure the author of the pull request is a maintainer
+#          # This is done by creating and deleting a branch
+#          git fetch origin
+#          git branch pre-release/${{ github.run_id }} origin/main
+#          git push -u origin pre-release/${{ github.run_id }}
+#          git checkout ${{ github.base_ref }}
+#          git branch -d pre-release/${{ github.run_id }}
+#          git push origin --delete pre-release/${{ github.run_id }}
   crate_universe_builds:
     # if: ${{ github.repository_owner == 'bazelbuild' }}
-    needs: is_author_maintainer
+#    needs: is_author_maintainer
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
