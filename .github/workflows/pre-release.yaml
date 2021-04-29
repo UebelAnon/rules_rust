@@ -109,9 +109,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
           # Save the git credentials so we can commit back to the repo
           persist-credentials: true
+      # Checkout the pr branch with the ability to push to it 
+      - uses: dawidd6/action-checkout-pr@v1
+        with: 
+          pr: ${{ github.event.number }}
       - run: |
           # Get current release version
           git fetch origin &> /dev/null
